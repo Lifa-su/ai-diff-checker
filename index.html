@@ -90,6 +90,74 @@ footer{padding:8px;text-align:center;font-size:.7rem;color:#333}
       <div class="placeholder">Enter text in both panels and click <b>Compare</b></div>
     </div>
   </div>
+
+<!-- Pro Section -->
+<style>
+.pro-section{position:relative;margin:16px;border-radius:12px;overflow:hidden;cursor:pointer;transition:transform .2s}
+.pro-section:hover{transform:translateY(-2px)}
+.pro-blur{filter:blur(5px);pointer-events:none;opacity:.65;padding:20px;background:#16213e;border-radius:12px}
+.pro-blur-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+@media(max-width:600px){.pro-blur-grid{grid-template-columns:1fr}}
+.pro-blur-item{background:#0d1117;border-radius:10px;padding:14px;text-align:center}
+.pro-blur-item .mock-icon{font-size:1.5rem;margin-bottom:6px}
+.pro-blur-item .mock-title{font-size:.85rem;color:#888;font-weight:600;margin-bottom:8px}
+.pro-blur-item .mock-code{text-align:left;margin-top:8px;font-family:monospace;font-size:.7rem;color:#888;background:#1a1a2e;padding:8px;border-radius:6px;line-height:1.5}
+.pro-blur-item .mock-code .mc-add{color:#4caf50}
+.pro-blur-item .mock-code .mc-del{color:#f44336}
+.pro-blur-item .mock-bar{height:6px;background:#2a2a4a;border-radius:3px;margin-top:8px;overflow:hidden}
+.pro-blur-item .mock-bar span{display:block;height:100%;background:#e94560;border-radius:3px}
+.pro-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(26,26,46,.55);border-radius:12px;border:2px dashed rgba(233,69,96,.4)}
+.pro-lock{font-size:2.5rem;margin-bottom:8px}
+.pro-label{font-size:1.1rem;font-weight:700;color:#fff}
+.pro-sublabel{font-size:.85rem;color:#888;margin-top:4px}
+.pro-modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:9999;align-items:center;justify-content:center;padding:20px}
+.pro-modal-bg.show{display:flex}
+.pro-modal{background:#16213e;border-radius:20px;padding:32px;max-width:420px;width:100%;text-align:center;border:1px solid #2a2a4a;animation:proIn .25s ease}
+@keyframes proIn{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+.pro-modal h2{font-size:1.4rem;margin-bottom:4px;color:#e0e0e0}
+.pro-modal .pro-price{font-size:2.2rem;font-weight:800;color:#e94560;margin:12px 0}
+.pro-modal ul{list-style:none;text-align:left;margin:20px 0}
+.pro-modal li{padding:10px 0;border-bottom:1px solid #2a2a4a;font-size:.95rem;display:flex;align-items:center;gap:10px;color:#e0e0e0}
+.pro-modal li:last-child{border-bottom:none}
+.pro-modal li .li-icon{font-size:1.1rem;flex-shrink:0}
+.btn-upgrade{display:block;width:100%;padding:14px;background:#e94560;color:#fff;border:none;border-radius:12px;font-size:1.05rem;font-weight:700;cursor:pointer;margin-top:20px;transition:background .2s;text-decoration:none;text-align:center}
+.btn-upgrade:hover{background:#d63851}
+.btn-later{display:block;width:100%;padding:10px;background:none;border:none;color:#888;font-size:.9rem;cursor:pointer;margin-top:8px}
+.btn-later:hover{color:#fff}
+</style>
+
+<div class="pro-section" onclick="document.getElementById('proModal').classList.add('show')">
+<div class="pro-blur">
+<div class="pro-blur-grid">
+<div class="pro-blur-item"><div class="mock-icon">📁</div><div class="mock-title">File Comparison</div><div class="mock-bar"><span style="width:70%"></span></div><div class="mock-bar" style="margin-top:4px"><span style="width:45%"></span></div></div>
+<div class="pro-blur-item"><div class="mock-icon">🎨</div><div class="mock-title">Syntax Highlighting</div><div class="mock-code"><span class="mc-del">- const old = true;</span><br><span class="mc-add">+ const new = false;</span><br>&nbsp; return value;</div></div>
+<div class="pro-blur-item"><div class="mock-icon">🔀</div><div class="mock-title">Git Diff Format</div><div class="mock-code">@@ -1,3 +1,3 @@<br><span class="mc-del">-removed line</span><br><span class="mc-add">+added line</span></div></div>
+</div>
+</div>
+<div class="pro-overlay">
+<div class="pro-lock">🔒</div>
+<div class="pro-label">Pro Features</div>
+<div class="pro-sublabel">Click to unlock file diff, syntax highlighting & Git format</div>
+</div>
+</div>
+
+<div class="pro-modal-bg" id="proModal" onclick="if(event.target===this)this.classList.remove('show')">
+<div class="pro-modal">
+<h2>🔀 Diff Checker Pro</h2>
+<p style="color:#888;font-size:.9rem">Professional code comparison toolkit</p>
+<div class="pro-price">$9</div>
+<ul>
+<li><span class="li-icon">📁</span>File Comparison — drag & drop files to compare directly</li>
+<li><span class="li-icon">🎨</span>Syntax Highlighting — language-aware diff for 50+ languages</li>
+<li><span class="li-icon">🔀</span>Git Diff Format — import/export standard unified diff format</li>
+<li><span class="li-icon">📋</span>Merge Tool — accept/reject changes with one click</li>
+<li><span class="li-icon">♾️</span>Lifetime access — one-time payment, no subscription</li>
+</ul>
+<a class="btn-upgrade" href="https://feifeicch.gumroad.com/l/ai-diff-checker-pro" target="_blank">Upgrade to Pro — $9</a>
+<button class="btn-later" onclick="event.stopPropagation();document.getElementById('proModal').classList.remove('show')">Maybe later</button>
+</div>
+</div>
+
 </div>
 <footer>AI Diff Checker</footer>
 <script>
