@@ -3,159 +3,113 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Diff Checker - Text Compare Tool</title>
-<meta name="description" content="Compare two texts side by side with highlighted differences.">
+<title>AI Diff Checker - Text Comparison Tool</title>
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#0d1117;--sf:#161b22;--sf2:#1c2333;--bd:#30363d;--tx:#e6edf3;--tx2:#8b949e;--ac:#58a6ff;--gbg:rgba(46,160,67,.25);--gt:#3fb950;--rbg:rgba(248,81,73,.25);--rt:#f85149;--ybg:rgba(210,153,34,.2);--yt:#d29922;--r:12px;--m:'SF Mono','Cascadia Code','Fira Code',monospace}
-body{background:var(--bg);color:var(--tx);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;display:flex;flex-direction:column}
-.hd{text-align:center;padding:2rem 1rem 1rem}
-.hd h1{font-size:1.8rem;font-weight:700;background:linear-gradient(135deg,#58a6ff,#bc8cff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hd p{color:var(--tx2);margin-top:.4rem;font-size:.9rem}
-.ct{display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center;align-items:center;padding:.75rem 1.5rem}
-.ct label{display:flex;align-items:center;gap:.4rem;color:var(--tx2);font-size:.85rem;cursor:pointer}
-.ct input[type=checkbox]{accent-color:var(--ac);width:16px;height:16px}
-.btn{background:var(--ac);color:#fff;border:none;padding:.55rem 1.4rem;border-radius:8px;font-size:.9rem;font-weight:600;cursor:pointer;transition:all .2s}
-.btn:hover{filter:brightness(1.15);transform:translateY(-1px)}
-.btn-o{background:transparent;border:1px solid var(--bd);color:var(--tx2)}
-.btn-o:hover{border-color:var(--ac);color:var(--ac)}
-.ss{display:flex;gap:1rem;justify-content:center;padding:.5rem 1rem;flex-wrap:wrap}
-.st{display:flex;align-items:center;gap:.35rem;font-size:.85rem;color:var(--tx2);padding:.3rem .7rem;background:var(--sf);border-radius:20px;border:1px solid var(--bd)}
-.st .d{width:8px;height:8px;border-radius:50%}.st .n{font-weight:700}
-.da{background:var(--gt)}.dd{background:var(--rt)}.dm{background:var(--yt)}
-.ew{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--bd);margin:1rem;border-radius:var(--r);overflow:hidden;min-height:350px}
-.ep{display:flex;flex-direction:column;background:var(--sf)}
-.ph{padding:.6rem 1rem;font-size:.8rem;font-weight:600;color:var(--tx2);background:var(--sf2);border-bottom:1px solid var(--bd)}
-.ep textarea{flex:1;background:transparent;color:var(--tx);border:none;padding:1rem;font-family:var(--m);font-size:.85rem;line-height:1.7;resize:none;outline:none}
-.ep textarea::placeholder{color:var(--tx2);opacity:.5}
-.dw{margin:0 1rem 1rem;border-radius:var(--r);overflow:hidden;border:1px solid var(--bd);display:none}
-.dw.show{display:block}
-.dh{display:grid;grid-template-columns:1fr 1fr;background:var(--sf2);border-bottom:1px solid var(--bd)}
-.dh div{padding:.6rem 1rem;font-size:.8rem;font-weight:600;color:var(--tx2)}
-.dh div+div{border-left:1px solid var(--bd)}
-.db{max-height:60vh;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--bd) transparent}
-.dr{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--bd)}
-.dr:last-child{border-bottom:none}
-.dc{display:flex;align-items:stretch;min-height:1.7em;font-family:var(--m);font-size:.83rem;line-height:1.7}
-.dc+.dc{border-left:1px solid var(--bd)}
-.ln{width:3rem;flex-shrink:0;text-align:right;padding:0 .5rem;color:var(--tx2);opacity:.5;user-select:none;background:rgba(0,0,0,.15);display:flex;align-items:center;justify-content:flex-end;font-size:.75rem}
-.lc{flex:1;padding:0 .75rem;white-space:pre-wrap;word-break:break-all;display:flex;align-items:center}
-.dc.a{background:var(--gbg)}.dc.a .ln{color:var(--gt);opacity:.8}
-.dc.r{background:var(--rbg)}.dc.r .ln{color:var(--rt);opacity:.8}
-.dc.m{background:var(--ybg)}.dc.m .ln{color:var(--yt);opacity:.8}
-.dc.e{background:var(--sf)}
-.ca{background:rgba(46,160,67,.4);border-radius:3px;padding:0 1px}
-.cr{background:rgba(248,81,73,.4);border-radius:3px;padding:0 1px}
-.ft{text-align:center;padding:1.5rem;color:var(--tx2);font-size:.75rem;border-top:1px solid var(--bd);margin-top:auto}
-@media(max-width:768px){.ew{grid-template-columns:1fr;margin:.5rem}.dw{margin:0 .5rem .5rem}.dh,.dr{grid-template-columns:1fr}.dc+.dc{border-left:none;border-top:1px solid var(--bd)}.hd h1{font-size:1.4rem}}
-::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--bd);border-radius:3px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#1a1a2e;color:#e0e0e0;font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;display:flex;flex-direction:column}
+header{padding:16px 24px;background:#16213e;border-bottom:1px solid #0f3460;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+h1{font-size:1.4rem;color:#e94560;font-weight:700}
+.controls{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.controls label{display:flex;align-items:center;gap:6px;font-size:.85rem;cursor:pointer;user-select:none}
+.controls input[type=checkbox]{accent-color:#e94560;width:16px;height:16px}
+.btn{background:#0f3460;color:#e0e0e0;border:1px solid #1a4a8a;padding:6px 16px;border-radius:6px;cursor:pointer;font-size:.85rem;transition:all .2s}
+.btn:hover{background:#1a4a8a}
+.btn.active{background:#e94560;border-color:#e94560;color:#fff}
+.view-toggle{display:flex}
+.view-toggle .btn{border-radius:0}
+.view-toggle .btn:first-child{border-radius:6px 0 0 6px}
+.view-toggle .btn:last-child{border-radius:0 6px 6px 0}
+.input-area{display:flex;flex:1;min-height:0}
+.input-pane{flex:1;display:flex;flex-direction:column;border-right:1px solid #0f3460}
+.input-pane:last-child{border-right:none}
+.pane-header{padding:8px 16px;background:#16213e;font-size:.8rem;color:#888;font-weight:600;text-transform:uppercase;letter-spacing:1px}
+textarea{flex:1;background:#0d1117;color:#e0e0e0;border:none;padding:12px 16px;font-family:'Cascadia Code','Fira Code',Consolas,monospace;font-size:14px;resize:none;outline:none;line-height:1.6}
+textarea::placeholder{color:#444}
+.action-bar{padding:10px 24px;background:#16213e;border-top:1px solid #0f3460;border-bottom:1px solid #0f3460;display:flex;align-items:center;gap:12px}
+.btn-compare{background:#e94560;border-color:#e94560;color:#fff;font-weight:600;padding:8px 24px;font-size:.9rem}
+.btn-compare:hover{background:#c73652}
+.btn-clear,.btn-swap{background:transparent;border-color:#444;color:#888}
+.btn-clear:hover,.btn-swap:hover{border-color:#888;color:#e0e0e0}
+.stats{margin-left:auto;font-size:.8rem;color:#666}
+.stats .added{color:#4caf50}.stats .removed{color:#f44336}.stats .modified{color:#ff9800}
+.output-area{flex:1;overflow:auto;background:#0d1117}
+.diff-container{font-family:'Cascadia Code','Fira Code',Consolas,monospace;font-size:14px;line-height:1.6}
+.diff-line{display:flex;min-height:1.6em;border-bottom:1px solid rgba(255,255,255,.03)}
+.line-num{min-width:50px;padding:0 8px;text-align:right;color:#555;background:#0a0e17;user-select:none;flex-shrink:0;font-size:12px;display:flex;align-items:center;justify-content:flex-end}
+.line-content{flex:1;padding:0 12px;white-space:pre-wrap;word-break:break-all}
+.line-prefix{color:#666;margin-right:8px;user-select:none;flex-shrink:0}
+.diff-line.added{background:#1a3a1a}.diff-line.added .line-num{background:#122412}.diff-line.added .line-prefix{color:#4caf50}
+.diff-line.removed{background:#3a1a1a}.diff-line.removed .line-num{background:#241212}.diff-line.removed .line-prefix{color:#f44336}
+.diff-line.mod-old{background:#3a2a1a}.diff-line.mod-old .line-num{background:#241a12}.diff-line.mod-old .line-prefix{color:#ff9800}
+.diff-line.mod-new{background:#1a3a2a}.diff-line.mod-new .line-num{background:#12241a}.diff-line.mod-new .line-prefix{color:#ff9800}
+.diff-line.equal .line-content{color:#888}
+.char-add{background:#2d5a2d;border-radius:2px;padding:0 1px}
+.char-del{background:#5a2d2d;border-radius:2px;padding:0 1px}
+.side-by-side{display:flex}.side-pane{flex:1;overflow-x:auto}.side-pane:first-child{border-right:2px solid #1a1a2e}
+.diff-line.empty-line{background:#0a0e17}.diff-line.empty-line .line-num{background:#080b12}
+.placeholder{padding:60px;text-align:center;color:#444;font-size:1rem}
+.main-content{display:flex;flex-direction:column;flex:1;min-height:0}
+.input-section{display:flex;flex-direction:column;height:35vh;min-height:200px}
+.output-section{flex:1;display:flex;flex-direction:column;min-height:0}
+footer{padding:8px;text-align:center;font-size:.7rem;color:#333}
 </style>
 </head>
 <body>
-<div class="hd"><h1>&#9878;&#65039; AI Diff Checker</h1><p>Paste two texts and compare them line by line</p></div>
-<div class="ct">
-<label><input type="checkbox" id="optWS"> Ignore whitespace</label>
-<label><input type="checkbox" id="optCase"> Ignore case</label>
-<button class="btn" onclick="runDiff()">Compare</button>
-<button class="btn btn-o" onclick="clearAll()">Clear</button>
+<header>
+  <h1>&#9889; AI Diff Checker</h1>
+  <div class="controls">
+    <label><input type="checkbox" id="ignoreWhitespace"> Ignore whitespace</label>
+    <label><input type="checkbox" id="ignoreCase"> Ignore case</label>
+    <div class="view-toggle">
+      <button class="btn active" id="btnUnified" onclick="setView('unified')">Unified</button>
+      <button class="btn" id="btnSplit" onclick="setView('split')">Side by Side</button>
+    </div>
+  </div>
+</header>
+<div class="main-content">
+  <div class="input-section">
+    <div class="input-area">
+      <div class="input-pane">
+        <div class="pane-header">Original Text</div>
+        <textarea id="textA" placeholder="Paste original text here..."></textarea>
+      </div>
+      <div class="input-pane">
+        <div class="pane-header">Modified Text</div>
+        <textarea id="textB" placeholder="Paste modified text here..."></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="action-bar">
+    <button class="btn btn-compare" onclick="runDiff()">Compare</button>
+    <button class="btn btn-swap" onclick="swapTexts()">&#8644; Swap</button>
+    <button class="btn btn-clear" onclick="clearAll()">Clear</button>
+    <div class="stats" id="stats"></div>
+  </div>
+  <div class="output-section">
+    <div class="output-area" id="output">
+      <div class="placeholder">Enter text in both panels and click <b>Compare</b></div>
+    </div>
+  </div>
 </div>
-<div class="ss" id="stats"></div>
-<div class="ew">
-<div class="ep"><div class="ph">Original Text</div><textarea id="textA" placeholder="Paste original text here..."></textarea></div>
-<div class="ep"><div class="ph">Modified Text</div><textarea id="textB" placeholder="Paste modified text here..."></textarea></div>
-</div>
-<div class="dw" id="diffWrap">
-<div class="dh"><div>Original</div><div>Modified</div></div>
-<div class="db" id="diffBody"></div>
-</div>
-<div class="ft">&copy; 2025 AI Diff Checker &mdash; Compare texts instantly.</div>
+<footer>AI Diff Checker</footer>
 <script>
-function lcs(a,b){
-  var m=a.length,n=b.length,C=[];
-  for(var i=0;i<=m;i++){C[i]=[];for(var j=0;j<=n;j++)C[i][j]=0;}
-  for(i=1;i<=m;i++)for(j=1;j<=n;j++)
-    C[i][j]=a[i-1]===b[j-1]?C[i-1][j-1]+1:Math.max(C[i-1][j],C[i][j-1]);
-  var res=[],x=m,y=n;
-  while(x>0&&y>0){
-    if(a[x-1]===b[y-1]){res.unshift({t:'eq',ai:x-1,bi:y-1});x--;y--;}
-    else if(C[x-1][y]>=C[x][y-1])x--;
-    else y--;
-  }
-  return res;
-}
-function norm(s,ws,cs){
-  if(ws)s=s.replace(/\s+/g,' ').trim();
-  if(cs)s=s.toLowerCase();
-  return s;
-}
-function charDiff(a,b){
-  var ca=a.split(''),cb=b.split(''),eq=lcs(ca,cb);
-  var ra=[],rb=[],ai=0,bi=0;
-  for(var k=0;k<eq.length;k++){
-    while(ai<eq[k].ai){ra.push('<span class="cr">');ra.push(esc(ca[ai]));ra.push('</span>');ai++;}
-    while(bi<eq[k].bi){rb.push('<span class="ca">');rb.push(esc(cb[bi]));rb.push('</span>');bi++;}
-    ra.push(esc(ca[ai]));rb.push(esc(cb[bi]));ai++;bi++;
-  }
-  while(ai<ca.length){ra.push('<span class="cr">');ra.push(esc(ca[ai]));ra.push('</span>');ai++;}
-  while(bi<cb.length){rb.push('<span class="ca">');rb.push(esc(cb[bi]));rb.push('</span>');bi++;}
-  return{left:ra.join(''),right:rb.join('')};
-}
+let currentView='unified',lastDiff=null;
+function setView(v){currentView=v;document.getElementById('btnUnified').classList.toggle('active',v==='unified');document.getElementById('btnSplit').classList.toggle('active',v==='split');if(lastDiff)render(lastDiff);}
+function swapTexts(){var a=document.getElementById('textA'),b=document.getElementById('textB'),t=a.value;a.value=b.value;b.value=t;}
+function clearAll(){document.getElementById('textA').value='';document.getElementById('textB').value='';document.getElementById('output').innerHTML='<div class="placeholder">Enter text in both panels and click <b>Compare</b></div>';document.getElementById('stats').innerHTML='';lastDiff=null;}
+function normalize(s){var ig=document.getElementById('ignoreWhitespace').checked,ic=document.getElementById('ignoreCase').checked;if(ig)s=s.replace(/\s+/g,' ').trim();if(ic)s=s.toLowerCase();return s;}
+function lcs(a,b){var m=a.length,n=b.length,dp=[];for(var i=0;i<=m;i++){dp[i]=[];for(var j=0;j<=n;j++)dp[i][j]=0;}for(var i=1;i<=m;i++)for(var j=1;j<=n;j++){if(normalize(a[i-1])===normalize(b[j-1]))dp[i][j]=dp[i-1][j-1]+1;else dp[i][j]=Math.max(dp[i-1][j],dp[i][j-1]);}var res=[];var i=m,j=n;while(i>0&&j>0){if(normalize(a[i-1])===normalize(b[j-1])){res.unshift({type:'equal',oldIdx:i-1,newIdx:j-1});i--;j--;}else if(dp[i-1][j]>=dp[i][j-1])i--;else j--;}return res;}
+function diffLines(a,b){var eq=lcs(a,b),result=[],oi=0,ni=0,ei=0;while(ei<eq.length){var e=eq[ei];while(oi<e.oldIdx&&ni<e.newIdx){result.push({type:'modified',oldLine:a[oi],newLine:b[ni],oldIdx:oi,newIdx:ni});oi++;ni++;}while(oi<e.oldIdx){result.push({type:'removed',oldLine:a[oi],oldIdx:oi});oi++;}while(ni<e.newIdx){result.push({type:'added',newLine:b[ni],newIdx:ni});ni++;}result.push({type:'equal',oldLine:a[oi],newLine:b[ni],oldIdx:oi,newIdx:ni});oi++;ni++;ei++;}while(oi<a.length&&ni<b.length){result.push({type:'modified',oldLine:a[oi],newLine:b[ni],oldIdx:oi,newIdx:ni});oi++;ni++;}while(oi<a.length){result.push({type:'removed',oldLine:a[oi],oldIdx:oi});oi++;}while(ni<b.length){result.push({type:'added',newLine:b[ni],newIdx:ni});ni++;}return result;}
+function charDiff(oldStr,newStr){var a=oldStr.split(''),b=newStr.split(''),m=a.length,n=b.length,dp=[];for(var i=0;i<=m;i++){dp[i]=[];for(var j=0;j<=n;j++)dp[i][j]=0;}for(var i=1;i<=m;i++)for(var j=1;j<=n;j++){if(a[i-1]===b[j-1])dp[i][j]=dp[i-1][j-1]+1;else dp[i][j]=Math.max(dp[i-1][j],dp[i][j-1]);}var ops=[],i=m,j=n;while(i>0||j>0){if(i>0&&j>0&&a[i-1]===b[j-1]){ops.unshift({type:'eq',ch:a[i-1]});i--;j--;}else if(j>0&&(i===0||dp[i][j-1]>=dp[i-1][j])){ops.unshift({type:'add',ch:b[j-1]});j--;}else{ops.unshift({type:'del',ch:a[i-1]});i--;}}return ops;}
 function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
-function runDiff(){
-  var ws=document.getElementById('optWS').checked;
-  var cs=document.getElementById('optCase').checked;
-  var lA=document.getElementById('textA').value.split('\n');
-  var lB=document.getElementById('textB').value.split('\n');
-  var nA=lA.map(function(s){return norm(s,ws,cs);});
-  var nB=lB.map(function(s){return norm(s,ws,cs);});
-  var eq=lcs(nA,nB);
-  var ops=[],ai=0,bi=0;
-  for(var k=0;k<eq.length;k++){
-    while(ai<eq[k].ai&&bi<eq[k].bi){ops.push({t:'mod',ai:ai,bi:bi});ai++;bi++;}
-    while(ai<eq[k].ai){ops.push({t:'del',ai:ai});ai++;}
-    while(bi<eq[k].bi){ops.push({t:'add',bi:bi});bi++;}
-    ops.push({t:'eq',ai:ai,bi:bi});ai++;bi++;
-  }
-  while(ai<lA.length&&bi<lB.length){ops.push({t:'mod',ai:ai,bi:bi});ai++;bi++;}
-  while(ai<lA.length){ops.push({t:'del',ai:ai});ai++;}
-  while(bi<lB.length){ops.push({t:'add',bi:bi});bi++;}
-  var added=0,deleted=0,modified=0,html=[];
-  for(var i=0;i<ops.length;i++){
-    var o=ops[i];
-    html.push('<div class="dr">');
-    if(o.t==='eq'){
-      html.push('<div class="dc"><span class="ln">'+(o.ai+1)+'</span><span class="lc">'+esc(lA[o.ai])+'</span></div>');
-      html.push('<div class="dc"><span class="ln">'+(o.bi+1)+'</span><span class="lc">'+esc(lB[o.bi])+'</span></div>');
-    }else if(o.t==='del'){
-      deleted++;
-      html.push('<div class="dc r"><span class="ln">'+(o.ai+1)+'</span><span class="lc">'+esc(lA[o.ai])+'</span></div>');
-      html.push('<div class="dc e"><span class="ln"></span><span class="lc"></span></div>');
-    }else if(o.t==='add'){
-      added++;
-      html.push('<div class="dc e"><span class="ln"></span><span class="lc"></span></div>');
-      html.push('<div class="dc a"><span class="ln">'+(o.bi+1)+'</span><span class="lc">'+esc(lB[o.bi])+'</span></div>');
-    }else{
-      modified++;
-      var cd=charDiff(lA[o.ai],lB[o.bi]);
-      html.push('<div class="dc m"><span class="ln">'+(o.ai+1)+'</span><span class="lc">'+cd.left+'</span></div>');
-      html.push('<div class="dc m"><span class="ln">'+(o.bi+1)+'</span><span class="lc">'+cd.right+'</span></div>');
-    }
-    html.push('</div>');
-  }
-  document.getElementById('diffBody').innerHTML=html.join('');
-  document.getElementById('diffWrap').classList.add('show');
-  document.getElementById('stats').innerHTML=
-    '<div class="st"><span class="d da"></span>Added: <span class="n">'+added+'</span></div>'+
-    '<div class="st"><span class="d dd"></span>Deleted: <span class="n">'+deleted+'</span></div>'+
-    '<div class="st"><span class="d dm"></span>Modified: <span class="n">'+modified+'</span></div>';
-}
-function clearAll(){
-  document.getElementById('textA').value='';
-  document.getElementById('textB').value='';
-  document.getElementById('diffBody').innerHTML='';
-  document.getElementById('diffWrap').classList.remove('show');
-  document.getElementById('stats').innerHTML='';
-}
+function renderCharDiff(ops,side){var h='';for(var i=0;i<ops.length;i++){var o=ops[i];if(o.type==='eq')h+=esc(o.ch);else if(o.type==='del'&&side==='old')h+='<span class="char-del">'+esc(o.ch)+'</span>';else if(o.type==='add'&&side==='new')h+='<span class="char-add">'+esc(o.ch)+'</span>';}return h;}
+function mkLine(cls,numL,numR,prefix,content){return '<div class="diff-line '+cls+'"><div class="line-num">'+(numL||'')+'</div><div class="line-num">'+(numR||'')+'</div><div class="line-content"><span class="line-prefix">'+prefix+'</span>'+content+'</div></div>';}
+function mkLineS(cls,num,prefix,content){return '<div class="diff-line '+cls+'"><div class="line-num">'+(num||'')+'</div><div class="line-content"><span class="line-prefix">'+prefix+'</span>'+content+'</div></div>';}
+function render(diff){var el=document.getElementById('output');if(currentView==='unified')renderUnified(diff,el);else renderSplit(diff,el);}
+function renderUnified(diff,el){var h='<div class="diff-container">';for(var i=0;i<diff.length;i++){var d=diff[i];if(d.type==='equal')h+=mkLine('equal',d.oldIdx+1,d.newIdx+1,' ',esc(d.oldLine));else if(d.type==='removed')h+=mkLine('removed',d.oldIdx+1,'','-',esc(d.oldLine));else if(d.type==='added')h+=mkLine('added','',d.newIdx+1,'+',esc(d.newLine));else if(d.type==='modified'){var ops=charDiff(d.oldLine,d.newLine);h+=mkLine('mod-old',d.oldIdx+1,'','~',renderCharDiff(ops,'old'));h+=mkLine('mod-new','',d.newIdx+1,'~',renderCharDiff(ops,'new'));}}h+='</div>';el.innerHTML=h;}
+function renderSplit(diff,el){var L='',R='';for(var i=0;i<diff.length;i++){var d=diff[i];if(d.type==='equal'){L+=mkLineS('equal',d.oldIdx+1,' ',esc(d.oldLine));R+=mkLineS('equal',d.newIdx+1,' ',esc(d.newLine));}else if(d.type==='removed'){L+=mkLineS('removed',d.oldIdx+1,'-',esc(d.oldLine));R+=mkLineS('empty-line','','','');}else if(d.type==='added'){L+=mkLineS('empty-line','','','');R+=mkLineS('added',d.newIdx+1,'+',esc(d.newLine));}else if(d.type==='modified'){var ops=charDiff(d.oldLine,d.newLine);L+=mkLineS('mod-old',d.oldIdx+1,'~',renderCharDiff(ops,'old'));R+=mkLineS('mod-new',d.newIdx+1,'~',renderCharDiff(ops,'new'));}}el.innerHTML='<div class="diff-container side-by-side"><div class="side-pane">'+L+'</div><div class="side-pane">'+R+'</div></div>';}
+function runDiff(){var a=document.getElementById('textA').value,b=document.getElementById('textB').value;var linesA=a.split('\n'),linesB=b.split('\n');var diff=diffLines(linesA,linesB);lastDiff=diff;render(diff);var added=0,removed=0,modified=0;for(var i=0;i<diff.length;i++){if(diff[i].type==='added')added++;else if(diff[i].type==='removed')removed++;else if(diff[i].type==='modified')modified++;}document.getElementById('stats').innerHTML='<span class="added">+'+added+' added</span> <span class="removed">-'+removed+' removed</span> <span class="modified">~'+modified+' modified</span>';}
+document.addEventListener('keydown',function(e){if((e.ctrlKey||e.metaKey)&&e.key==='Enter'){e.preventDefault();runDiff();}});
 </script>
 <script src="https://alwingulla.com/88/tag.min.js" data-zone="130747" async data-cfasync="false"></script>
 </body>
